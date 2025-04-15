@@ -3,12 +3,106 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[Title Here] | QWEL in Action</title>
+    <title>Rainy Days | QWEL in Action</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Noto+Sans:wght@100..900&family=Noto+Serif:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
-    <link rel="icon" href="./favicon.ico">
+    <style>
+      .intro {
+        background: #ffe;
+      }
+  
+      .intro__content {
+        padding: 0.75rem;
+        font-size: 0.875rem;
+      }
+  
+      #rollBtn {
+        display: block;
+        width: 7.5rem;
+        height: 3rem;
+        margin: 0.75rem auto;
+      }
+
+      .deck {
+        width: 100%;
+        font-size: 0.875rem;
+      }
+
+      .card {
+        flex: 0 1 4rem;
+      }
+  
+      #tankdeck {
+        height: 12rem;
+        margin: 0.75rem auto;
+        background: #cff;
+      }
+  
+      #happydeck {
+        height: 12rem;
+        margin: 0.75rem auto;
+        background: #ffc;
+      }
+  
+      #tankdeck li,
+      #happydeck li {
+        display: flex;
+        align-items: center;
+        height: 10.5rem;
+        border: 2px solid #eee;
+        border-radius: 6px;
+      }
+  
+      #tankdeck li span,
+      #happydeck li span {
+        display: block;
+        width: 100%;
+        line-height: 1.2;
+        text-align: center;
+      }
+  
+      #tankdeck li:not(.active),
+      #happydeck li:not(.active) {
+        border: 2px solid #fff;
+        background-color: #eee;
+        color: #ccc;
+      }
+  
+      #tankdeck li.active:not(.fill) span:after {
+        display: block;
+        content: '空っぽ';
+      }
+  
+      #tankdeck li.active.fill {
+        background-color: #6cc;
+        color: #fff;
+      }
+  
+      #tankdeck li.active.fill span:after {
+        display: block;
+        content: '満タン';
+      }
+  
+      #log {
+        width: 100%;
+        margin: auto;
+      }
+  
+      .unit {
+        width: 100%;
+        margin-bottom: 0.75rem;
+        padding: 0.75rem;
+        background: #eff;
+        font-size: 0.875rem;
+        line-height: 1.5;
+      }
+  
+      .inactive {
+        opacity: 0;
+      }
+    </style>
   </head>
   <body>
     <header class="header">
@@ -16,17 +110,56 @@
       <ul class="breadcrumb">
         <li class="breadcrumb__item"><a href="https://qwel.design/">QWEL in Action</a></li>
         <li class="breadcrumb__item"><a href="../">Creative Crafts</a></li>
-        <li class="breadcrumb__item breadcrumb__item--current"><span>[Title Here]</span></li>
+        <li class="breadcrumb__item breadcrumb__item--current"><span>Rainy Days</span></li>
       </ul>
     </header>
     <main class="main">
-      <h2 class="main__title">[Title Here] | Created by <span> ― QWEL.DESIGN</span></h2>
+      <h2 class="main__title">Rainy Days | Created by <span> ― QWEL.DESIGN</span></h2>
       <ul class="main__list">
-        <li class="main__listItem--spec">[Spec Here]</li>
+        <li class="main__listItem--spec">以前、雨水を貯めて活用するという思想の元、ごく小さな規模で市民活動を行っていた</li>  
+        <li class="main__listItem--spec">そのとき、教育活動の一環として使えないかと思い付きでつくった「あめぐらゲーム」のプロトタイプ</li>
+        <li class="main__listItem--spec">初期の作品のため、ライブラリとして "jQuery" 使用</li>
       </ul>
-      
-
-
+      <div class="row">
+        <div class="intro --flexItem_md-6 --mt_3 --mb_2">
+          <p class="intro__content">QUERYボタンを押すと、天気・イベントサイコロを振ったことになります。
+            <br>RESULTボタンを押すと、結果が表示されます。
+            <br>ハッピーな結果のときは、「あめぐら！」と叫ばないとカードは貰えません。</p>
+          <button id="rollBtn" class="btn btn--primary" type="button">QUERY</button>
+        </div>
+        <div class="deck --flexItem_md-3 --text_center">
+          <h5>タンクカード</h5>
+          <ul id="tankdeck" class="row">
+            <li id="tank_1" class="card">
+              <span>タンク1</span>
+            </li>
+            <li id="tank_2" class="card">
+              <span>タンク2</span>
+            </li>
+            <li id="tank_3" class="card">
+              <span>タンク3</span>
+            </li>
+          </ul>
+        </div>
+        <div id="log" class="log --flexItem_md-6"></div>
+        <div class="deck --flexItem_md-3 --text_center">
+          <h5>ハッピーカード</h5>
+          <ul id="happydeck" class="row">
+            <li id="happy-aquashop" class="card">
+              <span>お魚を
+                <br>飼い始めた</span>
+            </li>
+            <li id="happy-gardenwork" class="card">
+              <span>野菜を
+                <br>収穫した</span>
+            </li>
+            <li id="happy-playing" class="card">
+              <span>思いっきり
+                <br>水遊びをした</span>
+            </li>
+          </ul>
+        </div>
+      </div>
     </main>
     <footer id="footer" class="footer">
       <div class="footer__inner">
@@ -42,5 +175,317 @@
       </div>
     </footer>
     <script src="./init.js"></script>
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+      var weatherArr = [
+        {
+          id: 1,
+          weatherTitle: '快晴',
+          watering: true,
+          fill: false,
+          flood: false,
+          play: true
+        },
+        {
+          id: 2,
+          weatherTitle: '晴',
+          watering: true,
+          ill: false,
+          flood: false,
+          play: true
+        },
+        {
+          id: 3,
+          weatherTitle: '曇',
+          watering: false,
+          ill: false,
+          flood: false,
+          play: false
+        },
+        {
+          id: 4,
+          weatherTitle: '小雨',
+          watering: false,
+          fill: true,
+          flood: false,
+          play: false
+        },
+        {
+          id: 5,
+          weatherTitle: '雨',
+          watering: false,
+          fill: true,
+          flood: false,
+          play: false
+        },
+        {
+          id: 6,
+          weatherTitle: '大雨',
+          watering: false,
+          fill: true,
+          flood: true,
+          play: false
+        }
+      ];
+  
+      var eventArr = [
+        {
+          id: 1,
+          eventTitle: 'アクアショップに行くことにしました。',
+          eventContent: [
+            'お魚をたくさん見たけれど、特に買いませんでした。',
+            'お魚をたくさん見たけれど、特に買いませんでした。',
+            'お魚をたくさん見たけれど、特に買いませんでした。',
+            'お魚をたくさん見たけれど、特に買いませんでした。',
+            'お魚をたくさん見たけれど、特に買いませんでした。',
+            'お魚をたくさん見たけれど、特に買いませんでした。'
+          ],
+          set: false,
+          play: true,
+          tank: 1
+        },
+        {
+          id: 2,
+          eventTitle: '庭仕事をすることにしました。',
+          eventContent: [
+            '暑すぎて、仕事は捗りませんでした。',
+            'ちょうど良い天気で、仕事が捗りました。',
+            'ちょうど良い天気で、仕事が捗りました。',
+            '雨で、仕事は捗りませんでした。',
+            '雨で、仕事は捗りませんでした。',
+            '大雨で、全く仕事は捗りませんでした。'
+          ],
+          set: false,
+          play: false,
+          tank: 2
+        },
+        {
+          id: 3,
+          eventTitle: '庭仕事をすることにしました。',
+          eventContent: [
+            '暑すぎて、仕事は捗りませんでした。',
+            'ちょうど良い天気で、仕事が捗りました。',
+            'ちょうど良い天気で、仕事が捗りました。',
+            '雨で、仕事は捗りませんでした。',
+            '雨で、仕事は捗りませんでした。',
+            '大雨で、全く仕事は捗りませんでした。'
+          ],
+          set: false,
+          play: false,
+          tank: 2
+        },
+        {
+          id: 4,
+          eventTitle: '公園に行くことにしました。',
+          eventContent: [
+            '暑すぎて、楽しく遊べませんでした。',
+            'ちょうど良い天気で、楽しく遊べました。',
+            'ちょうど良い天気で、楽しく遊べました。',
+            '雨で、楽しく遊べませんでした。',
+            '雨で、楽しく遊べませんでした。',
+            '大雨で、全く楽しく遊べませんでした。'
+          ],
+          set: false,
+          play: false,
+          tank: 3
+        },
+        {
+          id: 5,
+          eventTitle: '貯水タンクを新しく作ろうかな？',
+          set: true,
+          play: false,
+          tank: 0
+        },
+        {
+          id: 6,
+          eventTitle: '貯水タンクを新しく作ろうかな？',
+          set: true,
+          play: false,
+          tank: 0
+        }
+      ];
+  
+      var gameObj = {
+        result: false,
+        week: 0,
+        flood: 0,
+        weatherHistory: [],
+        eventHistory: [],
+        tanks: [],
+        isWatering: false,
+        isFill: false,
+        isSet: false,
+        happyAquashop: false,
+        happyGardenwork: false,
+        happyPlaying: false,
+        gameOver: false
+      };
+  
+      function pass(num1, num2) {
+        var $div1 = $('<div class="unit">'),
+          $div2 = $('<div class="result inactive">');
+        gameObj.week++;
+        $div1.append('<p>第' + gameObj.week + '週目</p>');
+        gameObj.weatherHistory.unshift(num1);
+        $div1.append('<p>今日の天気は、「' + weatherArr[num1].weatherTitle + '」</p>');
+        gameObj.eventHistory.unshift(num2);
+        $div1.append('<p>' + eventArr[num2].eventTitle + '</p>');
+        progress($div2, num1, num2);
+        $div1.append($div2);
+        $('#log').prepend($div1);
+      }
+  
+      function progress($div, num1, num2) {
+        console.log(gameObj);
+        var message = [];
+        //氾濫
+        if (weatherArr[num1].flood) {
+          gameObj.flood++;
+        } else {
+          gameObj.flood = 0;
+        }
+        //各種イベント
+        if (weatherArr[num1].watering) {
+          //晴れのとき
+          if (eventArr[num2].tank <= gameObj.tanks.length && gameObj.tanks[0] && weatherArr[num1].play) {
+            //ハッピー
+            gameObj.tanks.forEach(function (tank, index) {
+              gameObj.tanks[index] = false;
+            });
+            gameObj.isWatering = true;
+            switch (eventArr[num2].id) {
+              case 2:
+              case 3:
+                gameObj.happyGardenwork = true;
+                message.push('雨水タンクの水を庭に散布したおかげで、家庭菜園は大収穫です！！');
+                message.push('あめぐら！');
+                checkGameOver();
+                break;
+              case 4:
+                gameObj.happyPlaying = true;
+                message.push('雨水タンクの水を思いっ切り使って、水遊びを楽しみました！！');
+                message.push('あめぐら！');
+                checkGameOver();
+                break;
+              default:
+                message.push('晴れていたので、雨水タンクの水を散布しました。');
+                break;
+            }
+          } else if (0 < gameObj.tanks.length && gameObj.tanks[0]) {
+            //タンク有
+            gameObj.tanks.forEach(function (tank, index) {
+              gameObj.tanks[index] = false;
+            });
+            gameObj.isWatering = true;
+            message.push('晴れていたので、雨水タンクの水を散布しました。');
+          } else if (eventArr[num2].id !== 1 && !eventArr[num2].set) {
+            //タンク無
+            message.push(eventArr[num2].eventContent[num1]);
+          }
+        } else if (weatherArr[num1].fill) {
+          //雨のとき
+          if (0 < gameObj.tanks.length) {
+            //タンク有
+            gameObj.tanks.forEach(function (tank, index) {
+              gameObj.tanks[index] = true;
+            });
+            gameObj.isFill = true;
+            message.push('雨のおかげで、雨水タンクの水が満タンになりました。');
+          } else if (eventArr[num2].id !== 1 && !eventArr[num2].set) {
+            //タンク無
+            message.push(eventArr[num2].eventContent[num1]);
+          }
+        } else if (eventArr[num2].id !== 1 && !eventArr[num2].set) {
+          //曇りのとき
+          message.push(eventArr[num2].eventContent[num1]);
+        }
+        if (eventArr[num2].id === 1) {
+          //アクアショップ
+          if (eventArr[num2].tank <= gameObj.tanks.length && gameObj.tanks[0] && eventArr[num2].play) {
+            //ハッピー
+            gameObj.happyAquashop = true;
+            message.push('アクアショップでお魚を買いました。雨水タンクで飼うことにしましょう！');
+            message.push('あめぐら！');
+            checkGameOver();
+          } else {
+            message.push(eventArr[num2].eventContent[num1]);
+          }
+        }
+        if (eventArr[num2].set) {
+          //タンク制作
+          if (gameObj.tanks.length < 3) {
+            gameObj.tanks.push(false);
+            gameObj.isSet = true;
+            message.push('すてきな貯水タンクができあがりました。');
+          } else {
+            message.push('これ以上タンクは設置できませんね。');
+          }
+        }
+        //メッセージを挿入
+        message.forEach(function (txt) {
+          $div.prepend('<p>' + txt + '</p>');
+        })
+      }
+  
+      function query() {
+        pass(Math.floor(Math.random() * 6), Math.floor(Math.random() * 6));
+        gameObj.result = true;
+        $('#rollBtn').text('RESULT');
+      }
+  
+      function result() {
+        $('#log').find('.result').removeClass('inactive');
+        if (gameObj.isWatering) {
+          $('#tankdeck').find('.active').each(function (index, el) {
+            $(el).removeClass('fill');
+          });
+          gameObj.isWatering = false;
+        }
+        if (gameObj.isFill) {
+          $('#tankdeck').find('.active').each(function (index, el) {
+            $(el).addClass('fill');
+          });
+          gameObj.isFill = false;
+        }
+        if (gameObj.isSet) {
+          $('#tankdeck').find('li').each(function (index, el) {
+            if (!$(el).hasClass('active') && gameObj.isSet) {
+              $(el).addClass('active');
+              gameObj.isSet = false;
+            }
+          });
+        }
+        if (gameObj.happyAquashop) {
+          $('#happy-aquashop').addClass('active');
+        }
+        if (gameObj.happyGardenwork) {
+          $('#happy-gardenwork').addClass('active');
+        }
+        if (gameObj.happyPlaying) {
+          $('#happy-playing').addClass('active');
+        }
+        if (gameObj.gameOver) {
+          $('#log').prepend('<p class="lead text-center">クリア！！</p>')
+        }
+  
+        gameObj.result = false;
+        $('#rollBtn').text('QUERY');
+      }
+  
+      function checkGameOver() {
+        if (gameObj.happyAquashop && gameObj.happyGardenwork && gameObj.happyPlaying) {
+          gameObj.gameOver = true;
+        }
+      }
+  
+      $('#rollBtn').on('click', function () {
+        if (gameObj.result) {
+          result();
+        } else if (!gameObj.gameOver) {
+          query();
+        }
+      });
+  
+    </script>
   </body>
 </html>
